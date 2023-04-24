@@ -18,8 +18,8 @@ jobs: # list of things to do
 
       - name: Populate hosts.ini from secrets
         run: |
-          echo "[nodes]" > hosts.ini
-          echo "${{ secrets.HOMELAB_NODES }}" >> server_setup/ hosts.ini
+          echo "[nodes]" > server_setup/hosts.ini
+          echo "${{ secrets.HOMELAB_NODES }}" >> server_setup/hosts.ini
 
       - name: Populate consul CA files from secrets
         run: |
