@@ -23,7 +23,7 @@
         docker_restart_handler_state: restarted
 
 - name: Set up Consul Servers
-  hosts: consul_server
+  hosts: all
   become: true
 
   roles:
