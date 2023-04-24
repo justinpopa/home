@@ -16,5 +16,8 @@ jobs: # list of things to do
       - name: Code Checkout
         uses: actions/checkout@v2
 
+      - name: Install Dependencies
+        run: pip3 install ansible-lint
+
       - name: Code Linting
         run: ansible-lint deploy.yml
