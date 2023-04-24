@@ -20,4 +20,5 @@ consul_port_server: 8300
 consul_port_sidecar_min: 21000
 consul_port_sidecar_max: 21255
 
-dpkg_arch: "{{ 'amd64' if ansible_architecture == 'x86_64' else ansible_architecture }}"
+arch: "{{ ansible_architecture }}"
+dpkg_arch: "{{ 'amd64' if arch == 'x86_64' else arch }}"
