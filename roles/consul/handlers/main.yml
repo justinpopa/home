@@ -1,0 +1,12 @@
+# -*- mode: ansible -*-
+# vi: set ft=ansible :
+---
+handlers:
+  - name: restart-consul
+    ansible.builtin.systemd:
+      state: restarted
+      name: consul
+  - name: restart-bind9
+    ansible.builtin.systemd:
+      state: restarted
+      name: bind9
