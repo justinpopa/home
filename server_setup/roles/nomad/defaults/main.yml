@@ -6,6 +6,8 @@ nomad_data_dir: "/opt/consul"
 nomad_role: "server"
 nomad_version: "1.4.3-1"
 
+nfs_mount: "/mnt/nfs"
+
 cni_path: "/opt/cni/bin"
 cni_version: "1.2.0"
 arch: "{{ ansible_architecture }}"

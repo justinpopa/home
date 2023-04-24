@@ -58,3 +58,12 @@
     state: started
     enabled: true
     name: nomad
+
+- name: Mount nfs volume
+  ansible.posix.mount:
+    boot: true
+    name: "{{ nfs_mount }}"
+    src: "{{ nfs_server }}:{{ nfs_path }}"
+    fstype: nfs
+    opts: defaults
+    state: mounted
