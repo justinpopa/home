@@ -1,0 +1,13 @@
+# -*- mode: ansible -*-
+# vi: set ft=ansible :
+---
+galaxy_info:
+  role_name: nomad
+  author: Justin Popa
+  description: Installs and configures nomad for homelab
+  license: CC-BY
+  min_ansible_version: "2.14"
+  platforms:
+    - name: Ubuntu
+      versions:
+        - jammy
