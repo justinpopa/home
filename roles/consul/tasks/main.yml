@@ -8,8 +8,8 @@
 
 - name: Add HashiCorp repository
   ansible.builtin.apt_repository:
-    repo: |
-      deb [arch={{ dpkg_arch }}] https://apt.releases.hashicorp.com \
+    repo: >
+      deb [arch={{ dpkg_arch }}] https://apt.releases.hashicorp.com
       {{ ansible_distribution_release }} main
     state: present
 
