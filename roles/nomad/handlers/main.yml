@@ -1,8 +1,7 @@
 # -*- mode: ansible -*-
 # vi: set ft=ansible :
 ---
-handlers:
-  - name: restart
-    ansible.builtin.systemd:
-      state: restarted
-      name: nomad
+- name: Restart nomad
+  ansible.builtin.systemd:
+    name: nomad
+    state: restarted
