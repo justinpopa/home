@@ -14,7 +14,7 @@ jobs: # list of things to do
     steps: # list of steps to run
 
       - name: Code Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Prepare Ansible
         run: pip3 install --upgrade pip ansible ansible-lint
