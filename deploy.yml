@@ -1,12 +1,6 @@
 # -*- mode: ansible -*-
 # vi: set ft=ansible :
 ---
-- name: Set up Gluster Servers
-  hosts: all
-  become: true
-
-  roles:
-    - glusterfs
 
 - name: Install docker
   hosts: all
@@ -22,18 +16,11 @@
         docker_service_enabled: true
         docker_restart_handler_state: restarted
 
-- name: Set up Consul Servers
+- name: Set up all nodes 
   hosts: all
   become: true
 
   roles:
-    - role: consul
-      consul_role: server
-
-- name: Set up Nomad Cluster
-  hosts: all
-  become: true
-
-  roles:
-    - role: nomad
-      nomad_role: server
+    - glusterfs
+    - consul
+    - nomad

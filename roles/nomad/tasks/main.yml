@@ -22,6 +22,7 @@
   ansible.builtin.apt:
     name: nomad={{ nomad_version }}
     state: present
+  notify: restart
 
 - name: Configure /etc/nomad.d/nomad.hcl
   ansible.builtin.template:
@@ -30,6 +31,7 @@
     owner: nomad
     group: nomad
     mode: '0644'
+  notify: restart
 
 # make directory for cni plugins
 - name: Make directory for cni plugins
@@ -53,6 +55,6 @@
 
 - name: Enable and start nomad
   ansible.builtin.systemd:
-    state: restarted
+    state: started
     enabled: true
     name: nomad
