@@ -21,7 +21,7 @@
   ansible.builtin.apt:
     name: consul=1.14.4-1
     state: present
-  notify: restart-consul
+  notify: Restart consul
 
 - name: Configure /etc/consul.d/consul.hcl
   ansible.builtin.template:
@@ -30,7 +30,7 @@
     owner: consul
     group: consul
     mode: '0644'
-  notify: restart-consul
+  notify: Restart consul
 
 - name: Copy CA cert to /etc/consul.d/
   ansible.builtin.copy:
@@ -39,7 +39,7 @@
     owner: consul
     group: consul
     mode: '0644'
-  notify: restart-consul
+  notify: Restart consul
 
 - name: Copy CA key to /etc/consul.d/
   ansible.builtin.copy:
@@ -48,7 +48,7 @@
     owner: consul
     group: consul
     mode: '0644'
-  notify: restart-consul
+  notify: Restart consul
 
 - name: Generate node private key
   community.crypto.openssl_privatekey:
@@ -57,7 +57,7 @@
     type: ECC
     owner: consul
     group: consul
-  notify: restart-consul
+  notify: Restart consul
 
 - name: Generate an OpenSSL Certificate Signing Request
   community.crypto.openssl_csr:
@@ -66,7 +66,7 @@
     common_name: "server.{{ consul_datacenter }}.{{ consul_domain }}"
     owner: consul
     group: consul
-  notify: restart-consul
+  notify: Restart consul
 
 - name: Generate a Self Signed OpenSSL certificate
   community.crypto.x509_certificate:
@@ -78,7 +78,7 @@
     csr_path: /etc/consul.d/node-csr.pem
     owner: consul
     group: consul
-  notify: restart-consul
+  notify: Restart consul
 
 - name: Enable and start consul
   ansible.builtin.systemd:
@@ -90,7 +90,7 @@
   ansible.builtin.apt:
     name: bind9
     state: present
-  notify: restart-bind9
+  notify: Restart bind9
 
 - name: Copy bind defaults to /etc/default/named
   ansible.builtin.copy:
@@ -99,21 +99,21 @@
     owner: root
     group: root
     mode: '0644'
-  notify: restart-bind9
+  notify: Restart bind9
 
 - name: Get all default bind configs
   ansible.builtin.find:
     path: "/etc/bind/"
     excludes: 'named.conf'
   register: cleanup
-  notify: restart-bind9
+  notify: Restart bind9
 
 - name: Delete all default bind configs
   ansible.builtin.file:
     path: "{{ item.path }}"
     state: absent
   with_items: "{{ cleanup.files }}"
-  notify: restart-bind9
+  notify: Restart bind9
 
 - name: Configure /etc/bind/named.conf
   ansible.builtin.template:
@@ -122,7 +122,7 @@
     owner: root
     group: bind
     mode: '0644'
-  notify: restart-bind9
+  notify: Restart bind9
 
 - name: Enable and start bind9
   ansible.builtin.systemd:
