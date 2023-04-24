@@ -16,8 +16,11 @@ jobs: # list of things to do
       - name: Code Checkout
         uses: actions/checkout@v2
 
-      - name: Install Dependencies
+      - name: Prepare Ansible
         run: pip3 install --upgrade pip ansible ansible-lint
+
+      - name: Install geerlingguy.docker
+        run: ansible-galaxy install geerlingguy.docker
 
       - name: Code Linting
         run: ansible-lint deploy.yml
