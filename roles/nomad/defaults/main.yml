@@ -1,0 +1,12 @@
+# -*- mode: ansible -*-
+# vi: set ft=ansible :
+---
+nomad_datacenter: "homelab"
+nomad_data_dir: "/opt/consul"
+nomad_role: "server"
+nomad_version: "1.4.3-1"
+
+cni_path: "/opt/cni/bin"
+cni_version: "1.2.0"
+arch: "{{ ansible_architecture }}"
+dpkg_arch: "{{ 'amd64' if arch == 'x86_64' else arch }}"

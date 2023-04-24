@@ -30,10 +30,10 @@
     - role: consul
       consul_role: server
 
-# - name: Set up Nomad Cluster
-#   hosts: nomad_server
-#   become: true
+- name: Set up Nomad Cluster
+  hosts: nomad_server
+  become: true
 
-#   roles:
-#     - role: nomad
-#       nomad_role: server
+  roles:
+    - role: nomad
+      nomad_role: server
