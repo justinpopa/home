@@ -17,4 +17,4 @@ jobs: # list of things to do
         uses: actions/checkout@v3
 
       - name: Run actionlint
-        run: 'docker run --rm -v $(pwd):/repo --workdir /repo rhysd/actionlint:latest -color'
+        run: "docker run --rm -v $(pwd):/repo --workdir /repo rhysd/actionlint:latest -color"
