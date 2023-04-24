@@ -8,9 +8,9 @@
 
 - name: Add HashiCorp repository
   ansible.builtin.apt_repository:
-    repo: >
-      deb [arch={{ dpkg_arch }}] https://apt.releases.hashicorp.com
-      {{ ansible_distribution_release }} main
+    repo: "deb [arch={{ dpkg_arch }}] \
+    https://apt.releases.hashicorp.com \
+    {{ ansible_distribution_release }} main"
     state: present
 
 - name: Update apt cache
@@ -42,10 +42,9 @@
 
 - name: Download cni plugins from github and extract into {{ cni_path }}
   ansible.builtin.unarchive:
-    src: |-
-      https://github.com/containernetworking/plugins/releases/download/
-      v{{ cni_version }}/
-      cni-plugins-linux-{{ dpkg_arch }}-v{{ cni_version }}.tgz
+    src: "https://github.com/containernetworking/plugins/releases/\
+    download/v{{ cni_version }}/cni-plugins-linux-{{ dpkg_arch }}-v\
+    {{ cni_version }}.tgz"
     dest: "{{ cni_path }}"
     remote_src: true
     owner: nomad
