@@ -17,7 +17,7 @@ jobs: # list of things to do
         uses: actions/checkout@v2
 
       - name: Install Dependencies
-        run: pip3 install ansible-lint
+        run: pip3 install --upgrade pip ansible ansible-lint
 
       - name: Code Linting
         run: ansible-lint deploy.yml
