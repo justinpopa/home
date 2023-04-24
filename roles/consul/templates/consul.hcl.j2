@@ -42,7 +42,7 @@ ports {
 server = {{ (consul_role == 'server') | bool | to_json }}
 
 {% if consul_role == 'server' %}
-bootstrap_expect = {{ groups['consul_server'] | length }}
+bootstrap_expect = {{ groups['nodes'] | length }}
 {% endif %}
 
 ui_config {
@@ -54,7 +54,7 @@ connect {
 }
 
 retry_join = [
-  {% for host in groups['consul_server'] %}
+  {% for host in groups['nodes'] %}
   "{{ host }}",
   {% endfor %}
 ]
