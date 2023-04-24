@@ -52,7 +52,7 @@
     name: "{{ gluster_volume_name }}"
     bricks: "{{ brick_path }}"
     replicas: 3
-    cluster: "{{ groups['gluster_server'] }}"
+    cluster: "{{ groups['nodes'] }}"
   run_once: true
 
 - name: Create directory to mount gluster volume to
