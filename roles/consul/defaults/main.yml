@@ -4,7 +4,6 @@
 consul_datacenter: "homelab"
 consul_domain: "consul"
 consul_data_dir: "/opt/consul"
-consul_encrypt: ""
 consul_role: "server"
 consul_ui_enabled: true
 consul_acl_policy: "deny"
