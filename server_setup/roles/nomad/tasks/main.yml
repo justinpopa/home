@@ -59,7 +59,7 @@
     enabled: true
     name: nomad
 
-- name: Mount nfs volume
+- name: Mount nfs volume {{ nfs_mount }}
   ansible.posix.mount:
     boot: true
     name: "{{ nfs_mount }}"
