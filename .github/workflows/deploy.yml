@@ -1,5 +1,5 @@
 # .github/workflows/deploy.yml
-
+---
 name: Deploy # name of the action (displayed in the github interface)
 
 on: # event list
@@ -23,12 +23,15 @@ jobs: # list of things to do
 
       - name: Populate consul CA files from secrets
         run: |
-          echo "${{ secrets.CONSUL_AGENT_CA }}" > roles/consul/files/consul-agent-ca.pem
-          echo "${{ secrets.CONSUL_AGENT_CA_KEY }}" > roles/consul/files/consul-agent-ca-key.pem
+          echo "${{ secrets.CONSUL_AGENT_CA }}" >\
+            roles/consul/files/consul-agent-ca.pem
+          echo "${{ secrets.CONSUL_AGENT_CA_KEY }}" >\
+            roles/consul/files/consul-agent-ca-key.pem
 
       - name: Set consul_encrypt value in roles/consul/defaults/main.yml
         run: |
-          echo "consul_encrypt: ${{ secrets.CONSUL_ENCRYPT }}" >> roles/consul/defaults/main.yml
+          echo "consul_encrypt: ${{ secrets.CONSUL_ENCRYPT }}" >>\
+            roles/consul/defaults/main.yml
 
       - name: Run ansible playbook
         run: |
