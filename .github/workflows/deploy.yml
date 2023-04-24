@@ -33,6 +33,11 @@ jobs: # list of things to do
           echo "consul_encrypt: ${{ secrets.CONSUL_ENCRYPT }}" >>\
           server_setup/roles/consul/defaults/main.yml
 
+      - name: Append nomad defaults with NFS_SETTINGS from secrets
+        run: |
+          echo "${{ secrets.NFS_SETTINGS }}" >>\
+          server_setup/roles/nomad/defaults/main.yml
+
       - name: Run ansible playbook
         run: |
           ansible-playbook -i hosts.ini deploy.yml
