@@ -2,7 +2,7 @@
 # vi: set ft=ansible :
 ---
 - name: Set up Gluster Servers
-  hosts: gluster_server
+  hosts: all
   become: true
 
   roles:
@@ -31,7 +31,7 @@
       consul_role: server
 
 - name: Set up Nomad Cluster
-  hosts: nomad_server
+  hosts: all
   become: true
 
   roles:
