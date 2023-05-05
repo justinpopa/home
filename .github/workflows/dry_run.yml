@@ -1,0 +1,44 @@
+# .github/workflows/dry_run.yml
+---
+  name: Ansible Dry Run
+  
+  on:
+    pull_request:
+      branches:
+        - main
+  
+  jobs:
+    linting:
+      name: Ansible Dry Run
+      runs-on: self-hosted
+
+      steps:
+        - name: Code Checkout
+          uses: actions/checkout@v3
+
+        - name: Populate hosts.ini from secrets
+          run: |
+            echo "[nodes]" > server_setup/hosts.ini
+            echo "${{ secrets.HOMELAB_NODES }}" >> server_setup/hosts.ini
+
+        - name: Populate consul CA files from secrets
+          run: |
+            echo "${{ secrets.CONSUL_AGENT_CA }}" >\
+            server_setup/roles/consul/files/consul-agent-ca.pem
+            echo "${{ secrets.CONSUL_AGENT_CA_KEY }}" >\
+            server_setup/roles/consul/files/consul-agent-ca-key.pem
+
+        - name: Set consul_encrypt value in roles/consul/defaults/main.yml
+          run: |
+            echo "consul_encrypt: ${{ secrets.CONSUL_ENCRYPT }}" >>\
+            server_setup/roles/consul/defaults/main.yml
+
+        - name: Append nomad defaults with NFS_SETTINGS from secrets
+          run: |
+            echo "${{ secrets.NFS_SETTINGS }}" >>\
+            server_setup/roles/nomad/defaults/main.yml
+
+        - name: Run ansible playbook
+          run: |
+            ansible-playbook -i hosts.ini deploy.yml --check --diff
+          working-directory: server_setup
