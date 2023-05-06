@@ -1,5 +1,9 @@
 # home
 Home Infra Code
 
-Currently contains:
-* Playbook for GlusterFS and Consul
+TODO:
+
+* Get jobspec TF implemented in pipeline
+* https://hub.docker.com/r/vladgh/s3sync
+* modularize jobspecs
+* Get vagrant set up for local testing

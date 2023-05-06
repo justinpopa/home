@@ -59,11 +59,19 @@
     enabled: true
     name: nomad
 
+- name: Set idmapd.conf value
+  ansible.builtin.copy:
+    dest: /etc/idmapd.conf
+    owner: root
+    group: root
+    mode: '0644'
+    content: "{{ nfs_idmap_conf }}"
+
 - name: Mount nfs volume {{ nfs_mount }}
   ansible.posix.mount:
     boot: true
     name: "{{ nfs_mount }}"
     src: "{{ nfs_server }}:{{ nfs_path }}"
     fstype: nfs4
-    opts: "nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport"
+    opts: "rsize=16384,wsize=16384,hard,timeo=600,retrans=2,noatime,rw"
     state: mounted
