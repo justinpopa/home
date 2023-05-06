@@ -11,7 +11,7 @@
     cmd: "nfsidmap -c"
   changed_when: false
 
-- name: Mount nfs volume {{ nfs_mount }}
+- name: Remount nfs
   ansible.posix.mount:
     boot: true
     name: "{{ nfs_mount }}"
