@@ -38,6 +38,10 @@
             echo "${{ secrets.NFS_SETTINGS }}" >>\
             server_setup/roles/nomad/defaults/main.yml
 
+        - name: Preemptively install datadog.datadog role from Galaxy
+          run: |
+            ansible-galaxy install datadog.datadog
+
         - name: Run ansible playbook
           run: |
             ansible-playbook -i hosts.ini deploy.yml --check --diff
