@@ -38,6 +38,11 @@
             echo "${{ secrets.NFS_SETTINGS }}" >>\
             server_setup/roles/nomad/defaults/main.yml
 
+        - name: Append nomad defaults with DATADOG_URI from secrets
+          run: |
+            echo "datadog_uri: ${{ secrets.DATADOG_URI }}" >>\
+            server_setup/roles/nomad/defaults/main.yml
+
         - name: Run ansible playbook
           run: |
             ansible-playbook -i hosts.ini deploy.yml --check --diff

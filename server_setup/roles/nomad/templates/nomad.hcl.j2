@@ -41,3 +41,10 @@ plugin "docker" {
     }
   }
 }
+
+telemetry {
+  publish_allocation_metrics = true
+  publish_node_metrics       = true
+
+  datadog_address = "{{ datadog_uri }}"
+}
