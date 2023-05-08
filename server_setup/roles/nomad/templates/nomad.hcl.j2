@@ -45,6 +45,7 @@ plugin "docker" {
 telemetry {
   publish_allocation_metrics = true
   publish_node_metrics       = true
-
   datadog_address = "{{ datadog_uri }}"
+  disable_hostname = true
+  collection_interval = "10s"
 }
