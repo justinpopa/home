@@ -9,3 +9,7 @@
   ansible.builtin.systemd:
     name: bind9
     state: restarted
+- name: Restart datadog-agent
+  ansible.builtin.systemd:
+    name: datadog-agent
+    state: restarted

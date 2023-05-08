@@ -130,3 +130,12 @@
     enabled: true
     daemon_reload: true
     name: bind9
+
+- name: Configure datadog-agent for consul
+  ansible.builtin.template:
+    src: templates/datadog.yaml.j2
+    dest: /etc/datadog-agent/conf.d/consul.d/conf.yaml
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Restart datadog-agent
