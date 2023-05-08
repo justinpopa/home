@@ -21,7 +21,7 @@
   become: true
 
   roles:
-    - { role: datadog.datadog, become: true }
+    - datadog.datadog
   vars:
     datadog_api_key: "{{ lookup('env', 'DATADOG_API_KEY') }}"
 
