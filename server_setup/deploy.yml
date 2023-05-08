@@ -16,6 +16,15 @@
         docker_service_enabled: true
         docker_restart_handler_state: restarted
 
+- name: Install DataDog
+  hosts: all
+  become: true
+
+  roles:
+    - { role: datadog.datadog, become: true }
+  vars:
+    datadog_api_key: "{{ lookup('env', 'DATADOG_API_KEY') }}"
+
 - name: Set up all nodes
   hosts: all
   become: true
