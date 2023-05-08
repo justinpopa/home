@@ -24,7 +24,9 @@
     - datadog.datadog
   vars:
     datadog_api_key: "{{ lookup('env', 'DATADOG_API_KEY') }}"
+    datadog_site: "us5.datadoghq.com"
     datadog_additional_groups: docker, nomad, consul, bind, gluster
+
 
 - name: Set up all nodes
   hosts: all

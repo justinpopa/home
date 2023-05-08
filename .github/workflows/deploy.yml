@@ -40,7 +40,7 @@ jobs: # list of things to do
 
       - name: Preemptively install datadog.datadog role from Galaxy
         run: |
-          ansible-galaxy install datadog.datadog
+          ansible-galaxy install --force datadog.datadog
 
       - name: Run ansible playbook
         run: |
