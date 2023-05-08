@@ -135,7 +135,7 @@
   ansible.builtin.template:
     src: templates/datadog.yaml.j2
     dest: /etc/datadog-agent/conf.d/consul.d/conf.yaml
-    owner: root
-    group: root
+    owner: dd-agent
+    group: dd-agent
     mode: '0644'
   notify: Restart datadog-agent
