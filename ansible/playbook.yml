@@ -1,0 +1,39 @@
+# -*- mode: ansible -*-
+# vi: set ft=ansible :
+---
+# playbook.yml
+- name: "Provision Image"
+  hosts: 127.0.0.1
+  vars:
+    arch: "{{ ansible_architecture }}"
+    dpkg_arch: "{{ 'amd64' if arch == 'x86_64' else arch }}"
+    hashi_url: "https://apt.releases.hashicorp.com"
+    hashi_key: "/etc/apt/keyrings/hashicorp.asc"
+  connection: local
+
+  tasks:
+    - name: Add HashiCorp GPG key
+      ansible.builtin.get_url:
+        url: "{{ hashi_url }}/gpg"
+        dest: "{{ hashi_key }}"
+        mode: "0644"
+        force: true
+      become: true
+
+    - name: Add HashiCorp repository
+      ansible.builtin.apt_repository:
+        repo: >
+          deb [arch={{ dpkg_arch }} signed-by={{ hashi_key }}] {{ hashi_url }}
+          {{ ansible_distribution_release }} main
+        state: present
+      become: true
+
+    - name: Update apt cache
+      ansible.builtin.apt:
+        update_cache: true
+      become: true
+
+    - name: Upgrade all packages
+      ansible.builtin.apt:
+        upgrade: yes
+      become: true

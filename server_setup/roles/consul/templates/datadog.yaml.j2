@@ -1,4 +1,0 @@
-init_config:
-
-instances:
-  - url: http://{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] if hostvars[inventory_hostname]['ansible_tailscale0'] is not defined else hostvars[inventory_hostname]['ansible_tailscale0']['ipv4']['address'] }}:8500

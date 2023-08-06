@@ -1,0 +1,3 @@
+packer/output/*
+.vagrant
+.DS_Store

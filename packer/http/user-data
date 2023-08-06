@@ -1,0 +1,35 @@
+#cloud-config
+autoinstall:
+  version: 1
+  locale: en_US
+  keyboard:
+    layout: us
+  ssh:
+    install-server: yes
+    ssh_delete_keys: yes
+    allow-pw: no
+  packages:
+    - qemu-guest-agent
+  late-commands:
+    - |
+      if [ -d /sys/firmware/efi ]; then
+        apt-get install -y efibootmgr
+        efibootmgr -o $(efibootmgr | perl -n -e '/Boot(.+)\* ubuntu/ && print $1')
+      fi
+  storage:
+    layout:
+      name: direct
+    swap:
+      size: 0
+  user-data:
+    disable-root: yes
+    package_upgrade: yes
+    timezone: America/Detroit
+    users:
+      - name: packer
+        groups: [adm, sudo]
+        lock-passwd: yes
+        sudo: ALL=(ALL) NOPASSWD:ALL
+        shell: /bin/bash
+        ssh_import_id:
+          - gh:justinpopa
